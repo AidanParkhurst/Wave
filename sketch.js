@@ -242,7 +242,6 @@ class Player {
         let collided = false;
         for(let bullet of bullets)
         {
-            console.log(bullet.rX,bullet.lX,bullet.bY,bullet.tY);
             if (this.x > bullet.rX ||
                 this.x + this.width < bullet.lX ||
                 this.y > bullet.bY ||
