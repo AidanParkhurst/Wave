@@ -59,7 +59,7 @@ function draw()
     if(frameCount >= 60 && frameCount % 60 === 0 && !dead) {
         score++;
         bulletTimer++;
-        if (bulletTimer >= 50) {
+        if (bulletTimer >= 25) {
             bullets.push(new Bullet(Math.random() >= 0.5));
             bulletTimer = 0;
         }
