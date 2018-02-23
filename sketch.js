@@ -84,6 +84,10 @@ function keyPressed()
         case LEFT_ARROW:
             path.left = true;
             break;
+        case 32:
+            if(dead)
+                start();
+            break;
         default:
             return false;
     }
