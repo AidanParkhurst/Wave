@@ -6,6 +6,7 @@ let fontRegular;
 let dead;
 let resetButton;
 let bulletTimer;
+let debug = false;
 
 function preload()
 {
@@ -221,6 +222,13 @@ class Player {
         fill(255, 0, 220);
         rect(-this.width / 2, -this.width / 2, this.width, this.width, 5, 5, 5, 5);
         pop();
+        if(debug) {
+            stroke(255,0,0);
+            line(this.x, this.y, this.x + this.width, this.y);
+            line(this.x + this.width, this.y, this.x + this.width, this.y + this.width);
+            line(this.x + this.width, this.y + this.width, this.x, this.y + this.width);
+            line(this.x, this.y + this.width, this.x, this.y);
+        }
 
     }
 
@@ -234,11 +242,12 @@ class Player {
         let collided = false;
         for(let bullet of bullets)
         {
-            if (this.x > bullet.x + bullet.w ||
-                this.x + this.width < bullet.x ||
-                this.y > bullet.y + bullet.w ||
-                this.y + this.width < bullet.y)
-                    continue;
+            console.log(bullet.rX,bullet.lX,bullet.bY,bullet.tY);
+            if (this.x > bullet.rX ||
+                this.x + this.width < bullet.lX ||
+                this.y > bullet.bY ||
+                this.y + this.width < bullet.tY)
+                continue;
             collided = true;
         }
         return collided;
@@ -254,12 +263,21 @@ class Bullet {
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
         this.y = random(path.y, path.y + path.h);
         this.speed = -this.dir * random(this.minSpeed,this.maxSpeed);
-        this.w = 20
+        this.w = 20;
+        this.lX = this.x - this.w/2;
+        this.rX = this.x + this.w/2;
+        this.tY = this.y - this.w/2;
+        this.bY = this.y + this.w/2;
     }
 
     update()
     {
         this.x += this.speed;
+        this.lX = this.x - this.w/2;
+        this.rX = this.x + this.w/2;
+        this.tY = this.y - this.w/2;
+        this.bY = this.y + this.w/2;
+
         if(this.checkFinished())
         {
             this.reset();
@@ -272,6 +290,13 @@ class Bullet {
         strokeWeight(this.w / 3);
         fill(255,0,0);
         ellipse(this.x,this.y,this.w);
+        if(debug) {
+            stroke(255,0,0);
+            line(this.lX, this.tY, this.rX, this.tY);
+            line(this.rX, this.tY, this.rX, this.bY);
+            line(this.rX, this.bY, this.lX, this.bY);
+            line(this.lX, this.bY, this.lX, this.tY);
+        }
     }
 
     checkFinished()
