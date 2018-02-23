@@ -257,7 +257,7 @@ class Bullet {
     constructor(right)
     {
         this.minSpeed = 5;
-        this.maxSpeed = 10 + (score % 10) * 2;
+        this.maxSpeed = 10 + (score % 10);
         this.dir = (right ? 1 : -1);
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
         this.y = random(path.y, path.y + path.h);
