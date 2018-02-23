@@ -35,17 +35,18 @@ function start()
 function draw()
 {
     background(51);
-    path.show();
     if(!dead)
+    {
         path.update();
-    player.show();
-    if(!dead)
         player.update();
+    }
+    path.show();
+    player.show();
     for(let bullet of bullets)
     {
-        bullet.show();
         if(!dead)
             bullet.update();
+        bullet.show();
     }
     if(player.checkCollide(bullets))
     {
@@ -212,15 +213,17 @@ class Player {
 
     checkCollide(bullets)
     {
+        let collided = false;
         for(let bullet of bullets)
         {
             if (this.x > bullet.x + bullet.w ||
                 this.x + this.width < bullet.x ||
                 this.y > bullet.y + bullet.w ||
                 this.y + this.width < bullet.y)
-                    return false;
-            return true;
+                    continue;
+            collided = true;
         }
+        return collided;
     }
 }
 
