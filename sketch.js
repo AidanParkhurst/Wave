@@ -21,10 +21,10 @@ function setup()
 function start()
 {
     let pWidth = 300;
+    score = 0;
     path = new Path(width/2, height/2 - pWidth / 2, pWidth);
     player = new Player(path,20);
     bullets = [];
-    score = 0;
     bullets.push(new Bullet(false));
     textAlign(CENTER);
     textFont(fontRegular);
@@ -197,7 +197,7 @@ class Player {
     constructor(path, width) {
         this.path = path;
         this.width = width;
-        this.moveSpeed = 50;
+        this.moveSpeed = 40;
         this.y = this.path.y + (this.path.h / 2 - this.width / 2);
         this.x = this.path.x - this.width / 2;
     }
