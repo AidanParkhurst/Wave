@@ -30,6 +30,7 @@ function start()
     textFont(fontRegular);
     textSize(32);
     dead = false;
+    resetButton = new Button(width/2 - 200,height/2 + 100, 400, 100, 50, "Retry?");
 }
 
 function draw()
@@ -70,7 +71,6 @@ function endScreen()
     text("You Died!",0,height/2 - 100,width,height);
     textSize(48);
     text(`Your Score Was: ${score}`,0,height/2,width,height);
-    resetButton = new Button(width/2 - 200,height/2 + 100, 400, 100, 50, "Retry?");
     resetButton.show()
 }
 
@@ -106,9 +106,13 @@ function keyReleased()
 
 function mousePressed()
 {
-    if(resetButton && resetButton.checkClicked(mouseX,mouseY))
+    if(resetButton.showing && resetButton.checkClicked(mouseX,mouseY))
+    {
+        resetButton.showing = false;
         start();
+    }
 }
+
 class Button
 {
     constructor(x,y,length,height,rounding,text)
@@ -119,10 +123,12 @@ class Button
         this.l = length;
         this.r = rounding;
         this.text = text;
+        this.showing = false;
     }
 
     show()
     {
+        this.showing = true;
         fill(255);
         rect(this.x,this.y,this.l,this.h,this.r);
         fill(0);
@@ -231,7 +237,7 @@ class Bullet {
     constructor(right)
     {
         this.minSpeed = 5;
-        this.maxSpeed = 10 + score % 10;
+        this.maxSpeed = 10 + (score % 10) * 2;
         this.dir = (right ? 1 : -1);
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
         this.y = random(path.y, path.y + path.h);
