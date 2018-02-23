@@ -5,6 +5,7 @@ let score;
 let fontRegular;
 let dead;
 let resetButton;
+let bulletTimer;
 
 function preload()
 {
@@ -22,6 +23,7 @@ function start()
 {
     let pWidth = 300;
     score = 0;
+    bulletTimer = 0;
     path = new Path(width/2, height/2 - pWidth / 2, pWidth);
     player = new Player(path,20);
     bullets = [];
@@ -53,8 +55,14 @@ function draw()
     {
         dead = true;
     }
-    if(frameCount >= 60 && frameCount % 60 === 0 && !dead)
+    if(frameCount >= 60 && frameCount % 60 === 0 && !dead) {
         score++;
+        bulletTimer++;
+        if (bulletTimer >= 50) {
+            bullets.push(new Bullet(Math.random() >= 0.5));
+            bulletTimer = 0;
+        }
+    }
     noStroke();
     fill(255);
     text(score,0,10,width,height);
