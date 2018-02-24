@@ -260,7 +260,7 @@ class Bullet {
         this.maxSpeed = 10 + (score % 10);
         this.dir = (right ? 1 : -1);
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
-        this.y = random(path.y, path.y + path.h);
+        this.y = random(path.y + player.width * 1.5, path.y + (path.h - player.width * 1.5));
         this.speed = -this.dir * random(this.minSpeed,this.maxSpeed);
         this.w = 20;
         this.lX = this.x - this.w/2;
@@ -311,7 +311,7 @@ class Bullet {
     {
         this.dir = (random() > .5 ? 1 : -1);
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
-        this.y = random(path.y, path.y + path.h);
+        this.y = random(path.y + player.width * 1.5, path.y + (path.h - player.width * 1.5));
         this.speed = -this.dir * random(this.minSpeed,this.maxSpeed);
     }
 }
