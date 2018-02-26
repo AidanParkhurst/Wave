@@ -260,7 +260,7 @@ class Bullet {
         this.maxSpeed = 10;
         this.dir = (right ? 1 : -1);
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
-        this.y = random(path.y + player.width * 1.5, path.y + (path.h - player.width * 1.5));
+        this.y = random(path.y + player.width * 1.8, path.y + (path.h - player.width * 1.8));
         this.speed = -this.dir * random(this.minSpeed,this.maxSpeed);
         this.w = 20;
         this.lX = this.x - this.w/2;
@@ -291,10 +291,14 @@ class Bullet {
         ellipse(this.x,this.y,this.w);
         if(debug) {
             stroke(255,0,0);
+            //Hitbox
             line(this.lX, this.tY, this.rX, this.tY);
             line(this.rX, this.tY, this.rX, this.bY);
             line(this.rX, this.bY, this.lX, this.bY);
             line(this.lX, this.bY, this.lX, this.tY);
+            //Range
+            line(0,path.y + player.width * 1.8,width,path.y + player.width * 1.8);
+            line(0,path.y + (path.h - player.width * 1.8), width, path.y + (path.h - player.width * 1.8));
         }
     }
 
