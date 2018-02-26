@@ -260,9 +260,17 @@ class Bullet {
         this.maxSpeed = 10;
         this.dir = (right ? 1 : -1);
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
-        this.y = random(path.y + player.width * 1.8, path.y + (path.h - player.width * 1.8));
         this.speed = -this.dir * random(this.minSpeed,this.maxSpeed);
         this.w = 20;
+        this.minY = path.y + this.w + player.width * 1.3;
+        this.maxY = path.y + (path.h - (this.w + player.width * 1.3));
+        this.y = random(this.minY, this.maxY);
+        if(debug)
+        {
+            console.log(`Max: ${path.y + this.w + player.width * 1.5}`);
+            console.log(`Min: ${path.y + (path.h - (this.w + player.width * 1.5))}`);
+            console.log(`Bullet's ${this.y}`);
+        }
         this.lX = this.x - this.w/2;
         this.rX = this.x + this.w/2;
         this.tY = this.y - this.w/2;
@@ -288,6 +296,7 @@ class Bullet {
         stroke(255);
         strokeWeight(this.w / 3);
         fill(255,0,0);
+        ellipseMode(CENTER);
         ellipse(this.x,this.y,this.w);
         if(debug) {
             stroke(255,0,0);
@@ -297,8 +306,8 @@ class Bullet {
             line(this.rX, this.bY, this.lX, this.bY);
             line(this.lX, this.bY, this.lX, this.tY);
             //Range
-            line(0,path.y + player.width * 1.8,width,path.y + player.width * 1.8);
-            line(0,path.y + (path.h - player.width * 1.8), width, path.y + (path.h - player.width * 1.8));
+            line(0,this.minY,width,this.minY);
+            line(0,this.maxY,width,this.maxY,);
         }
     }
 
@@ -315,7 +324,13 @@ class Bullet {
     {
         this.dir = (random() > .5 ? 1 : -1);
         this.x = this.dir === 1 ? random(width, width+200) : random(0, -200);
-        this.y = random(path.y + player.width * 1.5, path.y + (path.h - player.width * 1.5));
+        this.y = random(this.minY, this.maxY);
         this.speed = -this.dir * random(this.minSpeed,this.maxSpeed);
+        if(debug)
+        {
+            console.log(`Max: ${path.y + this.w + player.width * 1.5}`);
+            console.log(`Min: ${path.y + (path.h - (this.w + player.width * 1.5))}`);
+            console.log(`Bullet's ${this.y}`);
+        }
     }
 }
