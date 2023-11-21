@@ -53,7 +53,7 @@ function draw()
     player.show();
     for(let bullet of bullets)
     {
-        if(!dead)
+        if(!dead && started)
             bullet.update();
         bullet.show();
     }
@@ -78,6 +78,10 @@ function draw()
 
 function startPrompt()
 {
+    noStroke();
+    fill(100,100,100,100);
+    rect(0,0,width,height);
+    fill(255);
     text("Wave",0,height/2 - 100,width,height);
     textSize(48);
     text("Press LEFT or RIGHT arrow to Start",0,height/2,width,height);
