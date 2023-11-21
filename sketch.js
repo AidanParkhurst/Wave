@@ -6,6 +6,7 @@ let fontRegular;
 let dead;
 let resetButton;
 let bulletTimer;
+let started = false;
 let debug = false;
 
 function preload()
@@ -39,6 +40,10 @@ function start()
 function draw()
 {
     background(51);
+    if(!started)
+    {
+        startPrompt();
+    }
     if(!dead)
     {
         path.update();
@@ -56,7 +61,7 @@ function draw()
     {
         dead = true;
     }
-    if(frameCount >= 60 && frameCount % 60 === 0 && !dead) {
+    if(frameCount >= 60 && frameCount % 60 === 0 && !dead && started) {
         score++;
         bulletTimer++;
         if (bulletTimer >= 25) {
@@ -69,6 +74,13 @@ function draw()
     text(score,0,10,width,height);
     if(dead)
         endScreen();
+}
+
+function endScreen()
+{
+    text("Wave",0,height/2 - 100,width,height);
+    textSize(48);
+    text("Press LEFT or RIGHT arrow to Start",0,height/2,width,height);
 }
 
 function endScreen()
@@ -88,9 +100,11 @@ function keyPressed()
     switch(keyCode)
     {
         case RIGHT_ARROW:
+            if(!started) started = true;
             path.right = true;
             break;
         case LEFT_ARROW:
+            if(!started) started = true;
             path.left = true;
             break;
         case 32:
