@@ -76,7 +76,7 @@ function draw()
         endScreen();
 }
 
-function endScreen()
+function startPrompt()
 {
     text("Wave",0,height/2 - 100,width,height);
     textSize(48);
