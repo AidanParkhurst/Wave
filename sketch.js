@@ -40,10 +40,6 @@ function start()
 function draw()
 {
     background(51);
-    if(!started)
-    {
-        startPrompt();
-    }
     if(!dead)
     {
         path.update();
@@ -72,7 +68,9 @@ function draw()
     noStroke();
     fill(255);
     text(score,0,10,width,height);
-    if(dead)
+    if(!started)
+        startPrompt();
+    else if(dead)
         endScreen();
 }
 
