@@ -79,7 +79,7 @@ function draw()
 function startPrompt()
 {
     noStroke();
-    fill(100,100,100,100);
+    fill(50,50,50,100);
     rect(0,0,width,height);
     fill(255);
     text("Wave",0,height/2 - 100,width,height);
@@ -103,6 +103,14 @@ function keyPressed()
 {
     switch(keyCode)
     {
+        case 65:
+            if(!started) started = true;
+            path.left = true;
+            break;
+        case 68:
+            if(!started) started = true;
+            path.right = true;
+            break;
         case RIGHT_ARROW:
             if(!started) started = true;
             path.right = true;
@@ -124,6 +132,15 @@ function keyReleased()
 {
     switch(keyCode)
     {
+        case 65: // A
+            path.left = false;
+            break;
+        case 68: // D
+            path.right = false;
+            break;
+        case LEFT_ARROW:
+            path.left = false;
+            break;
         case RIGHT_ARROW:
             path.right = false;
             break;
