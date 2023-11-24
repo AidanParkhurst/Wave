@@ -79,7 +79,7 @@ function draw()
 function startPrompt()
 {
     noStroke();
-    fill(50,50,50,100);
+    fill(255,0,220,100);
     rect(0,0,width,height);
     fill(255);
     text("Wave",0,height/2 - 100,width,height);
